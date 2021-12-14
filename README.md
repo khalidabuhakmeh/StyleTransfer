@@ -5,6 +5,6 @@ Sample code to perform inference with mosaic model
 https://github.com/onnx/models/tree/master/vision/style_transfer/fast_neural_style
 
 # Sample input/output
-![](src/input/lenna.jpg)
+![](src/input/thiscatdoesnotexist_01.jpg)
 
-![](src/output/expected_lenna_mosaic.jpg)
+![](src/output/expected_thiscatdoesnotexist_01_mosaic.jpg)
