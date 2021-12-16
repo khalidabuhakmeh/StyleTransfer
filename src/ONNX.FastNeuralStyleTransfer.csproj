@@ -7,13 +7,12 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 
-		<Authors>Gerardo Lijs</Authors>
-		<Copyright>Copyright © Gerardo Lijs 2021</Copyright>
+		<Authors>Khalid Abuhakmeh, Gerardo Lijs</Authors>
+		<Copyright>Copyright © Khalid Abuhakmeh 2021</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.10.0" />
-		<PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.10.0" />
 		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
 	</ItemGroup>
 
@@ -24,6 +23,10 @@
 		<None Update="model\*.onnx">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="bin\Debug\net6.0\runtimes\osx.10.14-x64\native\libonnxruntime.dylib" />
 	</ItemGroup>
 
 </Project>
