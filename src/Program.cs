@@ -1,17 +1,41 @@
-﻿using OpenCvSharp;
+﻿using ONNX.FastNeuralStyleTransfer;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
 
-namespace ONNX.FastNeuralStyleTransfer;
+const string filename = "cat.png";
+const string imageFilePath = @$"./input/{filename}";
+Directory.CreateDirectory("output");
 
-public class Program
+var styles = new[]
 {
-    static void Main()
-    {
-        var inputImage = new Mat(@"input\thiscatdoesnotexist_01.jpg");
+    (name: "mosaic", model: "mosaic.onnx"),
+    (name: "candy", model: "candy-9.onnx"),
+    (name: "pointilism", model: "pointilism-9.onnx"),
+    (name: "rain-princess", model: "rain-princess-9.onnx"),
+    (name: "udnie", model: "udnie-9.onnx"),
+};
 
-        var model = new FastNeuralStyleTransfer_Model(@"model\mosaic.onnx");
-        var outputImage = model.RunInference(inputImage);
-
-        Directory.CreateDirectory("output");
-        outputImage.SaveImage(@"output\thiscatdoesnotexist_01_mosaic.jpg");
-    }
+var image = Image.Load<Rgb24>(imageFilePath);
+foreach (var (name, model) in styles) {
+    var result = StyleTransfer.Process(image, model);    
+    
+    IImageEncoder encoder = Path.GetExtension(imageFilePath) switch {
+        ".png" => new PngEncoder(),
+        ".jpg" => new JpegEncoder(),
+        _ => throw new Exception()
+    };
+    
+    result.Save($@"./output/{name}_{filename}", encoder);
 }
+
+
+
+
+
+
+
+
+

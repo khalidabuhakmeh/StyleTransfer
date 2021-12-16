@@ -13,19 +13,17 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.10.0" />
-		<PackageReference Include="OpenCvSharp4.Windows" Version="4.5.3.20211207" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.10.0" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="input\lenna.jpg">
+	  <None Update="input\**">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="input\thiscatdoesnotexist_01.jpg">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="model\mosaic.onnx">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="model\*.onnx">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>
